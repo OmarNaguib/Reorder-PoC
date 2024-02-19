@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { Responsive, WidthProvider } from "react-grid-layout";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [layout, setLayout] = useState([
+    { i: "a", x: 0, y: 0, w: 1, h: 2 },
+    { i: "b", x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4 },
+    { i: "c", x: 4, y: 0, w: 1, h: 2 },
+  ]);
+
+  const onLayoutChange = (newLayout) => {
+    setLayout(newLayout);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      <ResponsiveGridLayout
+        className="layout"
+        layout={layout}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        onLayoutChange={onLayoutChange}
+        draggableHandle=".dragHandle"
+        style={{ width: "500px", background: "grey" }}
+      >
+        <div key="a" className="dragHandle">
+          Component A
+        </div>
+        <div key="b" className="dragHandle">
+          Component B
+        </div>
+        <div key="c" className="dragHandle">
+          Component C
+        </div>
+      </ResponsiveGridLayout>
+    </div>
+  );
 }
 
-export default App
+export default App;
