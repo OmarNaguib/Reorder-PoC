@@ -16,6 +16,10 @@ function App() {
     { i: "f", x: 6, y: 2, w: 6, h: 1 },
     { i: "g", x: 2, y: 3, w: 6, h: 1 },
   ]);
+  const [isEditable, setIsEditable] = useState(false);
+  const toggleEditable = () => {
+    setIsEditable(!isEditable);
+  };
 
   const onLayoutChange = (newLayout) => {
     setLayout(newLayout);
@@ -54,6 +58,18 @@ function App() {
         width: "100vw",
       }}
     >
+      <button
+        onClick={toggleEditable}
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "10px",
+          transform: "translateY(-50%)",
+          margin: "10px",
+        }}
+      >
+        Edit
+      </button>
       <ResponsiveGridLayout
         className="layout"
         layout={layout}
@@ -63,6 +79,8 @@ function App() {
         onLayoutChange={onLayoutChange}
         draggableHandle=".dragHandle"
         style={{ flexGrow: 1, maxWidth: "1200px", background: "grey" }}
+        isDraggable={isEditable}
+        isResizable={isEditable}
       >
         {layout.map((item) => (
           <Card
