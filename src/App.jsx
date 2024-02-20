@@ -9,12 +9,12 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function App() {
   const [layout, setLayout] = useState([
-    { i: "a", x: 0, y: 0, w: 6, h: 1 },
-    { i: "b", x: 6, y: 0, w: 6, h: 1 },
-    { i: "c", x: 2, y: 1, w: 12, h: 1 },
-    { i: "d", x: 0, y: 2, w: 6, h: 1 },
-    { i: "f", x: 6, y: 2, w: 6, h: 1 },
-    { i: "g", x: 2, y: 3, w: 6, h: 1 },
+    { i: "first", x: 0, y: 0, w: 6, h: 1, name: "first" },
+    { i: "second", x: 6, y: 0, w: 6, h: 1, name: "second" },
+    { i: "third", x: 2, y: 1, w: 12, h: 1, name: "third" },
+    { i: "fourth", x: 0, y: 2, w: 4, h: 1, name: "fourth" },
+    { i: "fifth", x: 4, y: 2, w: 4, h: 1, name: "fifth" },
+    { i: "sixth", x: 8, y: 2, w: 4, h: 1, name: "sixth" },
   ]);
   const [isEditable, setIsEditable] = useState(false);
   const toggleEditable = () => {
@@ -25,10 +25,11 @@ function App() {
     setLayout(newLayout);
   };
 
-  const getOption = () => {
+  const getOption = (item) => {
+    console.log(item)
     return {
       title: {
-        text: "ECharts example",
+        text: item.i,
       },
       tooltip: {},
       legend: {
@@ -91,7 +92,7 @@ function App() {
             data-grid={{ x: item.x, y: item.y, w: item.w, h: item.h }}
             className="dragHandle"
           >
-            <ReactEcharts option={getOption()} />
+            <ReactEcharts option={getOption(item)} />
           </Card>
         ))}
       </ResponsiveGridLayout>
