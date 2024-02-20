@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -26,7 +28,7 @@ function App() {
   };
 
   const getOption = (item) => {
-    console.log(item)
+    console.log(item);
     return {
       title: {
         text: item.i,
@@ -85,11 +87,14 @@ function App() {
         style={{ flexGrow: 1, maxWidth: "1200px", background: "grey" }}
         isDraggable={isEditable}
         isResizable={isEditable}
+        compactType={null}
       >
         {layout.map((item) => (
           <Card
             key={item.i}
-            data-grid={{ x: item.x, y: item.y, w: item.w, h: item.h }}
+            data-grid={{
+              ...item,
+            }}
             className="dragHandle"
           >
             <ReactEcharts option={getOption(item)} />
