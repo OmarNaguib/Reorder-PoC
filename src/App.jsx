@@ -66,6 +66,9 @@ function App() {
           left: "10px",
           transform: "translateY(-50%)",
           margin: "10px",
+          background: "black",
+          color: "white",
+          fontSize: "40px",
         }}
       >
         Edit
